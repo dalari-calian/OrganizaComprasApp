@@ -1,7 +1,13 @@
 import React, { useState } from 'react';
-import { View, TextInput, Button } from 'react-native';
+import { View, TextInput, Button, StyleSheet, Dimensions } from 'react-native';
+import FieldListName from '../components/FieldListName';
 
-const CreateListScreen = () => {
+const { height, width } = Dimensions.get('window');
+
+export default function CreateListScreen() {
+  
+  const padding = width * 0.085
+  
   const [listName, setListName] = useState('');
 
   const handleSave = () => {
@@ -10,15 +16,33 @@ const CreateListScreen = () => {
   };
 
   return (
-    <View>
-      <TextInput
-        placeholder="Nome da Lista"
-        value={listName}
-        onChangeText={setListName}
-      />
-      <Button title="Salvar Lista" onPress={handleSave} />
+    <View style={[styles.containerScreen, { paddingRight: padding, paddingLeft: padding }]}>
+      <View style={styles.containerField}>
+        <FieldListName/>
+      </View>
+      <View style={styles.containerListItens}>
+        <FieldListName/>
+      </View>
     </View>
   );
 };
 
-export default CreateListScreen;
+
+const styles = StyleSheet.create({
+  containerField: {
+    flex: 1,
+    flexGrow: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  containerListItens: {
+    flex: 1,
+    flexGrow: 4,
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+  },
+  containerScreen: {
+    flex: 1,
+    backgroundColor: 'white',
+  },
+});
